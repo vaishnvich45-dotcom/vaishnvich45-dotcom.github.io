@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaishnavi Chaudhari — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --warm-white: #faf8f5;
+    --ink: #1c1a17;
+    --muted: #7a7065;
+    --accent: #b5714a;
+    --accent-light: #e8d5c4;
+    --border: rgba(28,26,23,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* CURSOR */
+  body { cursor: none; }
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.1s ease;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem 4rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 82px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 40px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .btn-primary {
+    padding: 12px 28px;
+    background: var(--ink);
+    color: var(--warm-white);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-secondary {
+    padding: 12px 28px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-art {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.3s forwards;
+  }
+
+  .hero-art svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  .floating-word {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: rgba(28,26,23,0.08);
+    user-select: none;
+    animation: float linear infinite;
+  }
+
+  .initials-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    background: var(--warm-white);
+  }
+
+  .initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--accent-light);
+    animation: spin linear infinite;
+  }
+
+  .orbit-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* ABOUT */
+  .about {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--warm-white);
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .skill-category {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .skill-category:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .skill-category-icon {
+    font-size: 28px;
+    margin-bottom: 1rem;
+  }
+
+  .skill-category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-list li {
+    font-size: 12px;
+    padding: 4px 12px;
+    background: var(--cream);
+    color: var(--muted);
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* PROJECTS */
+  .projects { background: var(--cream); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+  }
+
+  .project-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--accent-light);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    line-height: 1;
+  }
+
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-meta {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 20px;
+  }
+
+  .project-link {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.3s;
+  }
+
+  .project-link:hover { gap: 10px; }
+
+  /* CREATIVE */
+  .creative-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .creative-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .creative-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .creative-card:hover::before { transform: scaleX(1); }
+  .creative-card:hover { transform: translateY(-4px); }
+
+  .creative-icon {
+    font-size: 36px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .creative-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .creative-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* BOOK */
+  .book-section {
+    background: var(--ink);
+    color: var(--warm-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .book-section .section-label { color: var(--accent-light); }
+
+  .book-section .section-title { color: var(--warm-white); }
+
+  .book-section .section-title em { color: var(--accent); }
+
+  .book-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(247,243,238,0.7);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+
+  .book-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .book-cover {
+    width: 200px;
+    height: 280px;
+    background: linear-gradient(135deg, #b5714a, #8a5235);
+    border-radius: 4px 12px 12px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: -8px 8px 30px rgba(0,0,0,0.4), inset -3px 0 8px rgba(0,0,0,0.2);
+  }
+
+  .book-cover::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 18px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .book-cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  .book-cover-author {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(247,243,238,0.7);
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .contact .section-title { margin-bottom: 1rem; }
+
+  .contact-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    padding: 14px 32px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .contact-link:hover {
+    background: var(--ink);
+    color: var(--warm-white);
+    border-color: var(--ink);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(var(--rot)); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(var(--rot)); opacity: 0; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 1.5rem 0 2.5rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo">V. Chaudhari</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#creative">Creative</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Portfolio — 2025</p>
+    <h1 class="hero-name">Vaishnavi<br><em>Chaudhari</em></h1>
+    <p class="hero-desc">
+      Engineer by degree. Author by passion. Artist at heart. Athlete by discipline.
+      A second-year IT student building things that matter — in code and in words.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Python · Django</span>
+      <span class="hero-tag">Java · JDBC</span>
+      <span class="hero-tag">Published Author</span>
+      <span class="hero-tag">University of Mumbai</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://www.linkedin.com/in/vaishnavi-chaudhari-543799321/" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-art">
+      <!-- floating words -->
+      <span class="floating-word" style="font-size:80px;left:10%;top:80%;--rot:-15deg;animation-duration:18s;animation-delay:0s;">code</span>
+      <span class="floating-word" style="font-size:48px;left:60%;top:85%;--rot:8deg;animation-duration:14s;animation-delay:3s;">art</span>
+      <span class="floating-word" style="font-size:60px;left:30%;top:88%;--rot:-5deg;animation-duration:20s;animation-delay:6s;">write</span>
+      <span class="floating-word" style="font-size:40px;left:70%;top:82%;--rot:12deg;animation-duration:16s;animation-delay:1s;">swim</span>
+      <span class="floating-word" style="font-size:52px;left:5%;top:84%;--rot:-10deg;animation-duration:22s;animation-delay:4s;">build</span>
+
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
+        <!-- orbit rings -->
+        <div class="orbit-ring" style="width:320px;height:320px;animation-duration:20s;">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="orbit-ring" style="width:260px;height:260px;animation-duration:15s;animation-direction:reverse;border-style:dashed;">
+          <div class="orbit-dot" style="background:var(--muted);width:5px;height:5px;top:-2.5px;"></div>
+        </div>
+        <!-- initials -->
+        <div class="initials-circle">
+          <span class="initials">VC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text reveal">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">More than just<br><em>an engineer</em></h2>
+    <div class="divider"></div>
+    <p>I'm Vaishnavi, a second-year Information Technology student at <strong>Shivajirao S. Jondhle College of Engineering</strong>, affiliated with the University of Mumbai.</p>
+    <p>I believe the best engineers are curious about <strong>everything</strong> — not just code. That's why I write books, make art, swim competitively, and play volleyball. Each of these teaches me something that coding alone never could.</p>
+    <p>I'm actively building my skills in <strong>Python, Django, Java, and web development</strong> — with my eyes set on opportunities beyond India. I'm a deep thinker who loves unconventional approaches to problems.</p>
+  </div>
+  <div class="about-stats reveal">
+    <div class="stat-card">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Projects Built</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1</div>
+      <div class="stat-label">Book Published</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">7.18</div>
+      <div class="stat-label">CGPA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">B2</div>
+      <div class="stat-label">English Level</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">What I Know</p>
+    <h2 class="section-title">Skills &<br><em>Technologies</em></h2>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-category">
+      <div class="skill-category-icon">🐍</div>
+      <div class="skill-category-title">Python & Web</div>
+      <ul class="skill-list">
+        <li>Python</li><li>Django</li><li>Flask</li><li>Jinja2</li><li>SQLite3</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">☕</div>
+      <div class="skill-category-title">Java & Database</div>
+      <ul class="skill-list">
+        <li>Java</li><li>JDBC</li><li>MySQL</li><li>JSP/Servlets</li><li>Eclipse IDE</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">🌐</div>
+      <div class="skill-category-title">Frontend & Tools</div>
+      <ul class="skill-list">
+        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>GitHub</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">💻</div>
+      <div class="skill-category-title">Core CS</div>
+      <ul class="skill-list">
+        <li>Operating Systems</li><li>Computer Networks</li><li>DBMS</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">🌍</div>
+      <div class="skill-category-title">Languages</div>
+      <ul class="skill-list">
+        <li>English — B2</li><li>Hindi — Native</li><li>Marathi — Native</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">🎯</div>
+      <div class="skill-category-title">Soft Skills</div>
+      <ul class="skill-list">
+        <li>Team Collaboration</li><li>Written Communication</li><li>Creative Thinking</li><li>Problem Solving</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="reveal">
+    <p class="section-label">What I've Built</p>
+    <h2 class="section-title">Featured<br><em>Projects</em></h2>
+  </div>
+  <div class="projects-grid reveal">
+    <div class="project-card">
+      <div class="project-number">01</div>
+      <h3 class="project-title">Blood Bank Registration System</h3>
+      <p class="project-meta">Mini Project · Team of 4 · AY 2024–25</p>
+      <p class="project-desc">A full-stack web application connecting donors, recipients, and blood banks. Features role-based login, real-time donor search by blood group and location, blood stock management, and a complete admin dashboard.</p>
+      <div class="project-tags">
+        <span class="project-tag">Java</span>
+        <span class="project-tag">JDBC</span>
+        <span class="project-tag">MySQL</span>
+        <span class="project-tag">JSP/Servlets</span>
+        <span class="project-tag">HTML/CSS/JS</span>
+      </div>
+      <span class="project-link" style="color:var(--muted);cursor:default;">College Submission Project</span>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">02</div>
+      <h3 class="project-title">Gym & Fitness Plan Generator</h3>
+      <p class="project-meta">Individual Project · Live on GitHub</p>
+      <p class="project-desc">A Django web app that calculates BMI from user inputs and generates a personalized exercise plan with reference links and a custom diet recommendation — all based on fitness category classification.</p>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Django</span>
+        <span class="project-tag">SQLite3</span>
+        <span class="project-tag">HTML/CSS</span>
+      </div>
+      <a href="https://github.com/vaishnvich45-dotcom/FITNESS-CLUB" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVE SIDE -->
+<section id="creative">
+  <div class="reveal">
+    <p class="section-label">Beyond the Code</p>
+    <h2 class="section-title">The Creative<br><em>Side of Me</em></h2>
+  </div>
+  <div class="creative-grid reveal">
+    <div class="creative-card">
+      <span class="creative-icon">🏊</span>
+      <h3 class="creative-title">Swimming</h3>
+      <p class="creative-desc">Competitive swimmer. Water teaches patience, rhythm, and the kind of focus that no classroom can.</p>
+    </div>
+    <div class="creative-card">
+      <span class="creative-icon">🎨</span>
+      <h3 class="creative-title">Art & Drawing</h3>
+      <p class="creative-desc">Visual thinker. Art helps me see problems differently — which makes me a better engineer.</p>
+    </div>
+    <div class="creative-card">
+      <span class="creative-icon">✍️</span>
+      <h3 class="creative-title">Writing</h3>
+      <p class="creative-desc">Author of "The Mind Full of Weather" — a self-published book. Words are just another form of code.</p>
+    </div>
+    <div class="creative-card">
+      <span class="creative-icon">🏐</span>
+      <h3 class="creative-title">Volleyball</h3>
+      <p class="creative-desc">Team sport. Every match is a lesson in communication, strategy, and trusting your teammates.</p>
+    </div>
+    <div class="creative-card">
+      <span class="creative-icon">🏸</span>
+      <h3 class="creative-title">Badminton</h3>
+      <p class="creative-desc">Quick reflexes, sharp focus. The same skills that help you debug code at 2am.</p>
+    </div>
+    <div class="creative-card">
+      <span class="creative-icon">📖</span>
+      <h3 class="creative-title">Deep Thinker</h3>
+      <p class="creative-desc">Drawn to unconventional ideas. I overthink — but productively. Every problem deserves a second look.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book-section">
+  <div class="reveal">
+    <p class="section-label">Published Work</p>
+    <h2 class="section-title">The Mind Full<br>of <em>Weather</em></h2>
+    <div class="divider"></div>
+    <p class="book-desc">A self-published book — written, edited, and put out into the world entirely independently. It takes a certain kind of discipline and courage to finish a long-form creative work and share it publicly. This is mine.</p>
+    <p class="book-desc" style="font-size:13px;opacity:0.6;">Written by Vaishnavi L. Chaudhari</p>
+  </div>
+  <div class="book-visual reveal">
+    <div style="position:relative;">
+      <div class="book-cover">
+        <div class="book-cover-title">The Mind Full of Weather</div>
+        <div class="book-cover-author">Vaishnavi Chaudhari</div>
+      </div>
+      <div style="position:absolute;top:10px;left:-8px;width:200px;height:280px;background:rgba(0,0,0,0.15);border-radius:4px 12px 12px 4px;z-index:-1;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Let's <em>Connect</em></h2>
+    <p class="contact-subtitle">Open to internships, collaborations, and interesting conversations.</p>
+    <div class="contact-links">
+      <a href="mailto:vaishnvich45@gmail.com" class="contact-link">✉ Email Me</a>
+      <a href="https://www.linkedin.com/in/vaishnavi-chaudhari-543799321/" target="_blank" class="contact-link">in LinkedIn</a>
+      <a href="https://github.com/vaishnvich45-dotcom" target="_blank" class="contact-link">⌥ GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-text">© 2025 Vaishnavi Chaudhari — Designed & Built with intention.</p>
+  <p class="footer-text">Thane, Maharashtra · University of Mumbai</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 80);
+  });
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
